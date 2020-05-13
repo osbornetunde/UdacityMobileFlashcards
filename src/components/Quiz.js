@@ -90,6 +90,7 @@ const Quiz = ({ route, navigation }) => {
         <QuizAction
           recordAnswer={recordAnswer}
           toggleQuestion={toggleQuestion}
+          showQuestion={showQuestion}
         />
       </View>
     ) : (

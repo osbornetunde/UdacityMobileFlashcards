@@ -3,13 +3,7 @@ import { Text, View, StyleSheet } from "react-native";
 import TextButton from "./TextButton";
 import { blue, white, gray, pink, lightPurp, orange } from "../utils/color";
 
-const QuizCard = ({ card }) => {
-  const [showQuestion, setShowQuestion] = useState(true);
-
-  const toggleQuestion = () => {
-    setShowQuestion(!showQuestion);
-  };
-
+const QuizCard = ({ card, toggleQuestion, showQuestion }) => {
   return (
     <View style={styles.container}>
       <View>

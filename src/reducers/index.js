@@ -18,7 +18,7 @@ const deck = (state = INITIAL_STATE, action) => {
         ...state,
         [action.deck.id]: {
           id: action.deck.id,
-          name: action.deck.deck,
+          deck: action.deck.deck,
           cards: action.deck.cards,
         },
       };

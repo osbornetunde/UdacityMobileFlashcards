@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, StatusBar, Platform } from 'react-native';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk'
@@ -17,6 +17,7 @@ import { purple, white } from './src/utils/color.js';
 import Deck from './src/components/Deck.js'
 import AddCard from './src/components/AddCard.js';
 import Quiz from './src/components/Quiz.js';
+import { setLocalNotification } from './src/utils/helpers.js';
 
 
 
@@ -151,6 +152,9 @@ const StackNavigatorConfig = {
   )
 
 export default function App() {
+  useEffect(() => {
+    setLocalNotification()
+  }, [])
   return (
     <Provider store={store}>
       <NavigationContainer>

@@ -6,7 +6,7 @@ import { getDeck, deleteDeck } from "../actions";
 import TextButton from "./TextButton";
 import { gray, purple, orange, pink, red, lightPurp } from "../utils/color";
 
-const Deck = ({ deck, navigation, deleteDeck, route }) => {
+const Deck = ({ deck, navigation, deleteDeck }) => {
   const removeDeck = (id) => {
     // navigation.goBack()
 
@@ -33,16 +33,16 @@ const Deck = ({ deck, navigation, deleteDeck, route }) => {
         >
           Add Card
         </TextButton>
-        {deck.cards.length !== 0 && (
-          <TextButton
-            style={{ color: purple, marginBottom: 5, fontSize: 15 }}
-            onPress={() => {
-              navigation.navigate("Quiz", { deck });
-            }}
-          >
-            Start Quiz
-          </TextButton>
-        )}
+
+        <TextButton
+          style={{ color: purple, marginBottom: 5, fontSize: 15 }}
+          onPress={() => {
+            navigation.navigate("Quiz", { deck });
+          }}
+        >
+          Start Quiz
+        </TextButton>
+
         <TextButton
           style={{ color: red, marginBottom: 5, fontSize: 15 }}
           onPress={() => removeDeck(deck.id)}
@@ -59,7 +59,7 @@ const Deck = ({ deck, navigation, deleteDeck, route }) => {
 };
 
 const mapStateToProps = (state, { route }) => {
-  const deck = state[route.params.deckId] || route.params;
+  const deck = state[route.params.deckId];
   return {
     deck,
   };

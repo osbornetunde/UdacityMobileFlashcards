@@ -2,19 +2,25 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { purple, white, lightPurp } from "../utils/color";
 
-const QuizActions = ({ recordAnswer }) => (
+const QuizActions = ({ recordAnswer, toggleQuestion = { toggleQuestion } }) => (
   <View style={styles.container}>
     <Text style={styles.heading}>How did you do in this question?</Text>
     <View style={styles.actions}>
       <TouchableOpacity
         style={[styles.answerBtn, { backgroundColor: purple }]}
-        onPress={() => recordAnswer(true)}
+        onPress={() => {
+          recordAnswer(true);
+          toggleQuestion();
+        }}
       >
         <Text style={styles.btnText}>Right</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={[styles.answerBtn, { backgroundColor: lightPurp }]}
-        onPress={() => recordAnswer(false)}
+        onPress={() => {
+          recordAnswer(false);
+          toggleQuestion();
+        }}
       >
         <Text style={styles.btnText}>Wrong</Text>
       </TouchableOpacity>

@@ -17,14 +17,16 @@ const AddCard = ({ route, addCard, navigation }) => {
   const [answer, setAnswer] = useState("");
 
   const createCard = () => {
-    addCard(route.params.deckId, { question, answer });
-    navigation.goBack();
-    setAnswer("");
-    setQuestion("");
-    // navigation.dispatch(
-    //     CommonActions.goBack({
-    //         key: 'DeckList',
-    //     }))
+    if (question && answer) {
+      addCard(route.params.deckId, { question, answer });
+      navigation.goBack();
+      setAnswer("");
+      setQuestion("");
+      // navigation.dispatch(
+      //   CommonActions.goBack({
+      //       key: 'Deck',
+      //   }))
+    }
   };
   return (
     <KeyboardAvoidingView

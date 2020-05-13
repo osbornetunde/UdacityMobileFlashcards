@@ -4,7 +4,7 @@ import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
 import QuizCard from "./QuizCard";
 import QuizAction from "./QuizAction";
 import QuizResult from "./QuizResult";
-import { white, gray } from "../utils/color";
+import { white, gray, orange } from "../utils/color";
 
 const defaultState = {
   correctAnswerCount: 0,
@@ -15,6 +15,11 @@ const defaultState = {
 
 const Quiz = ({ route, navigation }) => {
   const [item, setItem] = useState(defaultState);
+  const [showQuestion, setShowQuestion] = useState(true);
+
+  const toggleQuestion = () => {
+    setShowQuestion(!showQuestion);
+  };
 
   // console.log("======>question", route.params)
 
@@ -73,19 +78,34 @@ const Quiz = ({ route, navigation }) => {
     showResults,
   } = item;
 
-  return !showResults ? (
-    <View style={styles.container}>
-      <QuizCard card={getDeck().deck.cards[currentQuestionIndex]} />
-      <Text style={styles.count}>{getRemainingCountMessage()}</Text>
-      <QuizAction recordAnswer={recordAnswer} />
-    </View>
+  return route.params.deck.cards.length !== 0 ? (
+    !showResults ? (
+      <View style={styles.container}>
+        <QuizCard
+          card={getDeck().deck.cards[currentQuestionIndex]}
+          toggleQuestion={toggleQuestion}
+          showQuestion={showQuestion}
+        />
+        <Text style={styles.count}>{getRemainingCountMessage()}</Text>
+        <QuizAction
+          recordAnswer={recordAnswer}
+          toggleQuestion={toggleQuestion}
+        />
+      </View>
+    ) : (
+      <QuizResult
+        correctAnswerCount={correctAnswerCount}
+        incorrectAnswerCount={incorrectAnswerCount}
+        restartQuiz={restartQuiz}
+        navigation={navigation}
+      />
+    )
   ) : (
-    <QuizResult
-      correctAnswerCount={correctAnswerCount}
-      incorrectAnswerCount={incorrectAnswerCount}
-      restartQuiz={restartQuiz}
-      navigation={navigation}
-    />
+    <View style={styles.container}>
+      <Text style={{ textAlign: "center", fontSize: 20 }}>
+        There are no cards in the deck
+      </Text>
+    </View>
   );
 };
 

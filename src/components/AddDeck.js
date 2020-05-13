@@ -22,8 +22,8 @@ const AddDeck = ({ addDeck, navigation }) => {
     if (deck !== "") {
       const id = generateId();
       addDeck({ id, deck, cards: [] });
-      const decks = { id, deck, cards: [] };
-      navigation.navigate("Deck", decks);
+      // const decks = { id, deck, cards: [] };
+      navigation.navigate("Deck", { deckId: id });
       setDeck("");
     }
   };
